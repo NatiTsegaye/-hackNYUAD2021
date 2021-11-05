@@ -1,13 +1,14 @@
 from flask_restful import Api
 from flask import Flask
-import os
 from Main.Routes.routes import initialize_routes
 from config import Config
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config.from_object(Config)
 api = Api(app)
-
+CORS(app, resources=r'/*',allow_headers=[
+    "Content-Type", "Authorization", "Access-Control-Allow-Methods"])
 
 app.config['MONGODB_SETTINGS'] = {
     'host': Config.DB
